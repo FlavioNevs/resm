@@ -8,6 +8,9 @@ with open(sys.argv[1], "r") as ff:
 
     states = [7, 8, 9, 10, 11, 12, 13, 14]
     names = ['DAEE', 'CENA', 'CENT', 'JDIN', 'JDNL', 'JDSC', 'PQJA', 'TABO']
+    dias = []
+    locais = []
+    nats = []
 
     # Analisa liha por linha do código
     for row in resm:
@@ -29,7 +32,7 @@ with open(sys.argv[1], "r") as ff:
             for result in finder(row[6]):
                 if resender and result == stat:
                     # Salva os dados
-                    define(row[5], stat, row[6])
+                    define(row[5], stat, row[6], row[0], dias, locais, nats)
         states = [7, 8, 9, 10, 11, 12, 13, 14]
 
 
