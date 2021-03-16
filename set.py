@@ -1,3 +1,4 @@
+# Verificador do local
 def finder(local):
     if local == "Conceicao":
         return [12]
@@ -13,15 +14,35 @@ def finder(local):
         return []
 
 
-def define(nat, stat, local):
-    nats = ['Alagamento','Desabamento','Deslizamento','Escorregamento','Inundacao','Solapamento']
+def define(nat, stat, local, dia, dias, locais, nats):
+    ct = 0
+    ver = True
+
+    for dd in dias:
+        if dd == dia:
+            if locais[ct] == local and nats[ct] == nat:
+                ver = False
+                break
+            else:
+                ct += 1
+        else:
+            ct += 1
+    if ver:
+        dine(nat, stat, local)
+        dias.append(dia)
+        locais.append(local)
+        nats.append(nat)
+
+
+def dine(nat, stat, local):
+    nats = ['Alagamento', 'Desabamento', 'Deslizamento', 'Escorregamento', 'Inundacao', 'Solapamento']
+
     for nt in nats:
         ind = nats.index(nt) + 1
         if nat == nt:
             testes[stat][ind]['count'] += 1
             if local not in testes[stat][ind]['locais']:
                 testes[stat][ind]['locais'].append(local)
-
 
 def saver(name, states, names):
     with open(name, 'w') as file:
