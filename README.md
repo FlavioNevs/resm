@@ -1,5 +1,4 @@
 <h1>Analise de dados por limiar de chuva</h1>
-
 <hr>
 
 O codigo é de execução simples e utiliza os proprios argumentos do terminal para o seu funcionamento.
