@@ -1,7 +1,7 @@
 
 import csv
 import sys
-from classes import Modulo, Arquivo, testes
+from config.classes import Modulo, Arquivo, testes
 
 debug = True
 if debug:
@@ -21,9 +21,6 @@ with open(Arq.nomeA, 'r') as f:
     mod = Modulo()
 
     for row in file:
-        if mod.locais != []:
-            print(mod.locais)
-            print(mod.nats)
         if row[0] != mod.dias:
             mod.locais = []
             mod.nats = []
@@ -51,7 +48,6 @@ with open(Arq.nomeA, 'r') as f:
                     mod.dine(row[5], 15, row[6])
                     mod.locais.append(row[6])
                     mod.nats.append(row[5])
-                    print(f'{row[0]} - {row[5]} | {row[6]} - {stat}')
 
         mod.dias = row[0]
 
