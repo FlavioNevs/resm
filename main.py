@@ -9,6 +9,7 @@ with open(sys.argv[1], "r") as ff:
     states = [7, 8, 9, 10, 11, 12, 13, 14]
     names = ['DAEE', 'CENA', 'CENT', 'JDIN', 'JDNL', 'JDSC', 'PQJA', 'TABO']
     dias = []
+    ctd = []
     locais = []
     nats = []
 
@@ -19,16 +20,19 @@ with open(sys.argv[1], "r") as ff:
 
             # NA é a mesma coisa que 0, mas né...
             if row[stat] == 'NA':
-                resender = True
+                resender = False
             else:
                 # Verificação do Limiar
                 limiar = float(row[stat])
                 if limiar > int(sys.argv[2]) and limiar <= int(sys.argv[3]):
-                    testes[stat]['chu']['count'] += 1
+                    if not row[0] in ctd:
+                        testes[stat]['chu']['count'] += 1
+                        ctd.append(row[0])
                     resender = True
                 else:
                     resender = False
             # Verificação da estação condizente
+
             for result in finder(row[6]):
                 if resender and result == stat:
                     # Salva os dados
