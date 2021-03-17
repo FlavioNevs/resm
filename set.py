@@ -1,3 +1,5 @@
+import csv
+
 # Verificador do local
 def finder(local):
     if local == "Conceicao":
@@ -18,8 +20,10 @@ def define(nat, stat, local, dia, dias, locais, nats):
     ct = 0
     ver = True
 
+
+
     for dd in dias:
-        if dd == dia:
+        if dia == dd:
             if locais[ct] == local and nats[ct] == nat:
                 ver = False
                 break
@@ -27,12 +31,12 @@ def define(nat, stat, local, dia, dias, locais, nats):
                 ct += 1
         else:
             ct += 1
+
     if ver:
         dine(nat, stat, local)
         dias.append(dia)
         locais.append(local)
         nats.append(nat)
-
 
 def dine(nat, stat, local):
     nats = ['Alagamento', 'Desabamento', 'Deslizamento', 'Escorregamento', 'Inundacao', 'Solapamento']
@@ -53,6 +57,7 @@ def saver(name, states, names):
 
             for row in testes[rw].items():
                 file.write(',' + str(row[1]['count']))
+
 
 testes = {
     7: {
