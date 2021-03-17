@@ -1,45 +1,60 @@
-import sys
+
 import csv
-from set import saver, testes, finder, define
+import sys
+from classes import Modulo, Arquivo, testes
 
-# abre o arquivo da lista
-with open(sys.argv[1], "r") as ff:
-    resm = csv.reader(ff)
+debug = True
+if debug:
+    arquivo_entrada = 'resm.csv'
+    la = 100
+    lb = 300
+    arquivo_saida = 'resm_teste.csv'
+else:
+    arquivo = sys.argv[1]
+    la = int(sys.argv[2])
+    lb = int(sys.argv[3])
+    name = sys.argv[4]
 
-    states = [7, 8, 9, 10, 11, 12, 13, 14]
-    names = ['DAEE', 'CENA', 'CENT', 'JDIN', 'JDNL', 'JDSC', 'PQJA', 'TABO']
-    dias = []
-    ctd = []
-    locais = []
-    nats = []
+Arq = Arquivo(arquivo_entrada, arquivo_saida)
+with open(Arq.nomeA, 'r') as f:
+    file = csv.reader(f)
+    mod = Modulo()
 
-    # Analisa liha por linha do código
-    for row in resm:
-        # Analiza por estação
-        for stat in states:
+    for row in file:
+        if mod.locais != []:
+            print(mod.locais)
+            print(mod.nats)
+        if row[0] != mod.dias:
+            mod.locais = []
+            mod.nats = []
 
-            # NA é a mesma coisa que 0, mas né...
+        for stat in mod.states:
             if row[stat] == 'NA':
                 resender = False
+            elif la < float(row[stat]) <= lb:
+                if row[0] != mod.dias:
+                    testes[stat]['chu']['count'] += 1
+                    testes[15]['chu']['count'] += 1
+                resender = True
             else:
-                # Verificação do Limiar
-                limiar = float(row[stat])
-                if limiar > int(sys.argv[2]) and limiar <= int(sys.argv[3]):
-                    if not row[0] in ctd:
-                        testes[stat]['chu']['count'] += 1
-                        ctd.append(row[0])
-                    resender = True
-                else:
-                    resender = False
-            # Verificação da estação condizente
+                resender = False
 
-            for result in finder(row[6]):
+            for result in mod.finder(row[6]):
+                ver = False
                 if resender and result == stat:
-                    # Salva os dados
-                    define(row[5], stat, row[6], row[0], dias, locais, nats)
-        states = [7, 8, 9, 10, 11, 12, 13, 14]
+                    ver = mod.define(row[5], stat, row[6], row[0])
+                elif resender:
+                    ver = mod.define(row[5], stat, row[6], row[0])
+
+                if ver:
+                    mod.dine(row[5], stat, row[6])
+                    mod.dine(row[5], 15, row[6])
+                    mod.locais.append(row[6])
+                    mod.nats.append(row[5])
+                    print(f'{row[0]} - {row[5]} | {row[6]} - {stat}')
+
+        mod.dias = row[0]
 
 
-    # Pergunta o nome que o arquivo vai ser salvo e salva <set.saver()>
-    name = sys.argv[4]
-    saver(name, states, names)
+        mod.states = [7, 8, 9, 10, 11, 12, 13, 14]
+    Arq.saver(mod.states, mod.names)
