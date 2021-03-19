@@ -22,7 +22,7 @@ class Arquivo:
         self.nomeB = nomeB
         self.titulo = 'ID,Alagamento,Desabamento,Deslizamento,Escorregamento,Inundacao,Solapamento,QtChuva'
 
-    def saver(self, states, names):
+    def saverB(self, states, names):
         file = open(self.nomeB, 'w')
         file.write(self.titulo)
 
@@ -32,40 +32,51 @@ class Arquivo:
             for row in testes[rw].items():
                 file.write(',' + str(row[1]['count']))
 
-        file.write(('\n' + 'Total'))
-        for row in testes[15].items():
+    def saverM(self, la, lb, loc):
+        if loc == 'munmed':
+            ver = '_med.'
+        else:
+            ver = '_max.'
+
+        file = open(self.nomeB.replace('.', ver), 'a')
+
+        file.write(f'\n{la}_{lb}')
+
+        for row in testes[loc].items():
             file.write(',' + str(row[1]['count']))
 
 class Municipio:
     def __init__(self):
         self.dias = 0
         self.nats = []
+    
+    def define(self, nat, dia,):
+        ver = True
+        for natur in self.nats:
+            if nat == natur and dia == self.dias:
+                ver = False
+                break
+        return ver
+    
+    @staticmethod
+    def dine(nat, loc):
+        nats = ['Alagamento', 'Desabamento', 'Deslizamento', 'Escorregamento', 'Inundacao', 'Solapamento']
+
+        for nt in nats:
+            ind = nats.index(nt) + 1
+            if nat == nt:
+                testes[loc][ind]['count'] += 1
 
 class Bairro:
-
     def __init__(self):
-        self.states = [7, 8, 9, 10, 11, 12, 13, 14]
+        self.states = [12, 14, 16, 18, 20, 22, 24, 26]
         self.names = ['DAEE', 'CENA', 'CENT', 'JDIN', 'JDNL', 'JDSC', 'PQJA', 'TABO']
         self.dias = 0
         self.locais = []
         self.nats = []
 
-    def counterplus(self, dia, local, nat):
-        self.dias.append(dia)
-        self.locais.append(local)
-        self.nats.append(nat)
-
     @staticmethod
     def finder(local):
-        """
-        for item in self.loc.items():
-            for it in item:
-                print(it)
-                if local == item[0]:
-                    return item[1]
-                else:
-                    return []
-        """
         if local == "Conceicao":
             return [12]
         elif local == "Centro":
@@ -79,12 +90,12 @@ class Bairro:
         else:
             return []
 
-    def define(self, nat, stat, local, dia,):
+    def define(self, nat, local, dia,):
         ct = 0
         ver = True
 
         for natur in self.nats:
-            if nat == natur and tp == 'True':
+            if nat == natur:
                 for loc in self.locais:
                     if local == loc and dia == self.dias:
                         ver = False
@@ -105,50 +116,6 @@ class Bairro:
 
 
 testes = {
-    7: {
-        1: {'count': 0, 'locais': ['']},
-        2: {'count': 0, 'locais': ['']},
-        3: {'count': 0, 'locais': ['']},
-        4: {'count': 0, 'locais': ['']},
-        5: {'count': 0, 'locais': ['']},
-        6: {'count': 0, 'locais': ['']},
-        'chu': {'count': 0, 'locais': ['']}
-    },
-    8: {1: {'count': 0, 'locais': ['']},
-        2: {'count': 0, 'locais': ['']},
-        3: {'count': 0, 'locais': ['']},
-        4: {'count': 0, 'locais': ['']},
-        5: {'count': 0, 'locais': ['']},
-        6: {'count': 0, 'locais': ['']},
-        'chu': {'count': 0, 'locais': ['']}
-        },
-    9: {
-        1: {'count': 0, 'locais': ['']},
-        2: {'count': 0, 'locais': ['']},
-        3: {'count': 0, 'locais': ['']},
-        4: {'count': 0, 'locais': ['']},
-        5: {'count': 0, 'locais': ['']},
-        6: {'count': 0, 'locais': ['']},
-        'chu': {'count': 0, 'locais': ['']}
-    },
-    10: {
-        1: {'count': 0, 'locais': ['']},
-        2: {'count': 0, 'locais': ['']},
-        3: {'count': 0, 'locais': ['']},
-        4: {'count': 0, 'locais': ['']},
-        5: {'count': 0, 'locais': ['']},
-        6: {'count': 0, 'locais': ['']},
-        'chu': {'count': 0, 'locais': ['']}
-    },
-    11: {
-        1: {'count': 0, 'locais': ['']},
-        2: {'count': 0, 'locais': ['']},
-        3: {'count': 0, 'locais': ['']},
-        4: {'count': 0, 'locais': ['']},
-        5: {'count': 0, 'locais': ['']},
-        6: {'count': 0, 'locais': ['']},
-        'chu': {'count': 0, 'locais': ['']}
-    },
     12: {
         1: {'count': 0, 'locais': ['']},
         2: {'count': 0, 'locais': ['']},
@@ -158,7 +125,15 @@ testes = {
         6: {'count': 0, 'locais': ['']},
         'chu': {'count': 0, 'locais': ['']}
     },
-    13: {
+    14: {1: {'count': 0, 'locais': ['']},
+        2: {'count': 0, 'locais': ['']},
+        3: {'count': 0, 'locais': ['']},
+        4: {'count': 0, 'locais': ['']},
+        5: {'count': 0, 'locais': ['']},
+        6: {'count': 0, 'locais': ['']},
+        'chu': {'count': 0, 'locais': ['']}
+        },
+    16: {
         1: {'count': 0, 'locais': ['']},
         2: {'count': 0, 'locais': ['']},
         3: {'count': 0, 'locais': ['']},
@@ -167,7 +142,7 @@ testes = {
         6: {'count': 0, 'locais': ['']},
         'chu': {'count': 0, 'locais': ['']}
     },
-    14: {
+    18: {
         1: {'count': 0, 'locais': ['']},
         2: {'count': 0, 'locais': ['']},
         3: {'count': 0, 'locais': ['']},
@@ -176,7 +151,7 @@ testes = {
         6: {'count': 0, 'locais': ['']},
         'chu': {'count': 0, 'locais': ['']}
     },
-    15: {
+    20: {
         1: {'count': 0, 'locais': ['']},
         2: {'count': 0, 'locais': ['']},
         3: {'count': 0, 'locais': ['']},
@@ -184,5 +159,50 @@ testes = {
         5: {'count': 0, 'locais': ['']},
         6: {'count': 0, 'locais': ['']},
         'chu': {'count': 0, 'locais': ['']}
+    },
+    22: {
+        1: {'count': 0, 'locais': ['']},
+        2: {'count': 0, 'locais': ['']},
+        3: {'count': 0, 'locais': ['']},
+        4: {'count': 0, 'locais': ['']},
+        5: {'count': 0, 'locais': ['']},
+        6: {'count': 0, 'locais': ['']},
+        'chu': {'count': 0, 'locais': ['']}
+    },
+    24: {
+        1: {'count': 0, 'locais': ['']},
+        2: {'count': 0, 'locais': ['']},
+        3: {'count': 0, 'locais': ['']},
+        4: {'count': 0, 'locais': ['']},
+        5: {'count': 0, 'locais': ['']},
+        6: {'count': 0, 'locais': ['']},
+        'chu': {'count': 0, 'locais': ['']}
+    },
+    26: {
+        1: {'count': 0, 'locais': ['']},
+        2: {'count': 0, 'locais': ['']},
+        3: {'count': 0, 'locais': ['']},
+        4: {'count': 0, 'locais': ['']},
+        5: {'count': 0, 'locais': ['']},
+        6: {'count': 0, 'locais': ['']},
+        'chu': {'count': 0, 'locais': ['']}
+    },
+    'munmed': {
+        1: {'count': 0},
+        2: {'count': 0},
+        3: {'count': 0},
+        4: {'count': 0},
+        5: {'count': 0},
+        6: {'count': 0},
+        'chu': {'count': 0}
+    },
+    'munmax': {
+        1: {'count': 0},
+        2: {'count': 0},
+        3: {'count': 0},
+        4: {'count': 0},
+        5: {'count': 0},
+        6: {'count': 0},
+        'chu': {'count': 0}
     }
 }
