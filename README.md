@@ -3,13 +3,21 @@
 
 O codigo é de execução simples e utiliza os proprios argumentos do terminal para o seu funcionamento.
 
-Sintaxe:
-    
-    format.py <arquivo_entrada> <arquivo_saida>
-    main.py <arquivo_entrada> <limiar_a> <limiar_b> <arquivo_saida>
+Argumentos:
 
+    format
+        -ae     #Referencia o arquivo de entrada
+        -as     #Referencia o arquivo de Saida
+    
+    calc
+        -m      #Faz calculo por município
+        -m      #Faz calculo por bairro/estação
+        -ae     #Referencia o arquivo de entrada
+        -as     #Referencia o arquivo de Saida
+        -lA     #Referencia o Limiar A
+        -lB     #Referencia o Limiar B
 
 Exemplo:
 
-    python format.py resm.csv resm_mod.csv
-    python main.py resm.csv 10 20 resm_10_20.csv
+    python main.py format -ae resm.csv  -as resm_mod.csv
+    python main.py calc -as resm.csv -lA 10 -lB 20 -as resm_10_20.csv
