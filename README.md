@@ -6,16 +6,16 @@ O codigo é de execução simples e utiliza os proprios argumentos do terminal p
 Argumentos:
 
     format
-        -ae     #Referencia o arquivo de entrada
-        -as     #Referencia o arquivo de Saida
+        -ae     Referencia o arquivo de entrada
+        -as     Referencia o arquivo de Saida
     
     calc
-        -m      #Faz calculo por município
-        -b      #Faz calculo por bairro/estação
-        -ae     #Referencia o arquivo de entrada
-        -as     #Referencia o arquivo de Saida
-        -lA     #Referencia o Limiar A
-        -lB     #Referencia o Limiar B
+        -m      Faz calculo por município
+        -b      Faz calculo por bairro/estação
+        -ae     Referencia o arquivo de entrada
+        -as     Referencia o arquivo de Saida
+        -lA     Referencia o Limiar A
+        -lB     Referencia o Limiar B
 
 Exemplo:
 
