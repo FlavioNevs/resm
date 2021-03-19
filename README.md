@@ -11,7 +11,7 @@ Argumentos:
     
     calc
         -m      #Faz calculo por município
-        -m      #Faz calculo por bairro/estação
+        -b      #Faz calculo por bairro/estação
         -ae     #Referencia o arquivo de entrada
         -as     #Referencia o arquivo de Saida
         -lA     #Referencia o Limiar A
@@ -20,4 +20,4 @@ Argumentos:
 Exemplo:
 
     python main.py format -ae resm.csv  -as resm_mod.csv
-    python main.py calc -as resm.csv -lA 10 -lB 20 -as resm_10_20.csv
+    python main.py calc -b -as resm.csv -lA 10 -lB 20 -as resm_10_20.csv
