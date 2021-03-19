@@ -1,4 +1,20 @@
+import csv
 
+class formater:
+    def __init__(self, entrada, saida):
+        self.entrada = entrada
+        self.saida = saida
+    
+    def forma(self):
+        with open(self.entrada, "r", encoding="latin-1") as r:
+            resm = csv.reader(r)
+
+            with open(self.saida, 'w') as outro:
+                for row in resm:
+                    var = str(row[0])
+                    var = var.replace(';', ',')
+                    var = var.replace('"', '')
+                    outro.write(var+'\n')
 class Arquivo:
 
     def __init__(self, nomeA, nomeB):
@@ -20,8 +36,12 @@ class Arquivo:
         for row in testes[15].items():
             file.write(',' + str(row[1]['count']))
 
+class Municipio:
+    def __init__(self):
+        self.dias = 0
+        self.nats = []
 
-class Modulo:
+class Bairro:
 
     def __init__(self):
         self.states = [7, 8, 9, 10, 11, 12, 13, 14]
@@ -29,13 +49,6 @@ class Modulo:
         self.dias = 0
         self.locais = []
         self.nats = []
-        self.loc = {
-            'Conceicao': [12],
-            'Centro': [8, 9, 13],
-            'Eldorado': [10],
-            'Casa Grande': [7, 11],
-            'Taboao': [14]
-        }
 
     def counterplus(self, dia, local, nat):
         self.dias.append(dia)
@@ -71,7 +84,7 @@ class Modulo:
         ver = True
 
         for natur in self.nats:
-            if nat == natur:
+            if nat == natur and tp == 'True':
                 for loc in self.locais:
                     if local == loc and dia == self.dias:
                         ver = False
