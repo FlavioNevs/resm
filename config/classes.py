@@ -23,14 +23,14 @@ class Arquivo:
         self.titulo = 'ID,Alagamento,Desabamento,Deslizamento,Escorregamento,Inundacao,Solapamento,QtChuva'
 
     def saverB(self, states, names):
-        file = open(self.nomeB, 'w')
-        file.write(self.titulo)
+        with open(self.nomeB, 'w') as file:
+            file.write(self.titulo)
 
-        for rw in states:
-            file.write('\n' + names[states.index(rw)])
+            for rw in states:
+                file.write('\n' + names[states.index(rw)])
 
-            for row in testes[rw].items():
-                file.write(',' + str(row[1]['count']))
+                for row in testes[rw].items():
+                    file.write(',' + str(row[1]['count']))
 
     def saverM(self, la, lb, loc):
         if loc == 'munmed':
@@ -38,12 +38,12 @@ class Arquivo:
         else:
             ver = '_max.'
 
-        file = open(self.nomeB.replace('.', ver), 'a')
+        with open(self.nomeB.replace('.', ver), 'a') as file:
 
-        file.write(f'\n{la}_{lb}')
+            file.write(f'\n{la}_{lb}')
 
-        for row in testes[loc].items():
-            file.write(',' + str(row[1]['count']))
+            for row in testes[loc].items():
+                file.write(',' + str(row[1]['count']))
 
 class Municipio:
     def __init__(self):
@@ -69,7 +69,7 @@ class Municipio:
 
 class Bairro:
     def __init__(self):
-        self.states = [12, 14, 16, 18, 20, 22, 24, 26]
+        self.states = [12, 14 ,16, 18, 20, 22, 24, 26]
         self.names = ['DAEE', 'CENA', 'CENT', 'JDIN', 'JDNL', 'JDSC', 'PQJA', 'TABO']
         self.dias = 0
         self.locais = []
@@ -100,7 +100,6 @@ class Bairro:
                     if local == loc and dia == self.dias:
                         ver = False
                         break
-
         return ver
 
     @staticmethod
@@ -111,13 +110,18 @@ class Bairro:
             ind = nats.index(nt) + 1
             if nat == nt:
                 testes[stat][ind]['count'] += 1
+
+                # se o local nao estiver na lista
                 if local not in testes[stat][ind]['locais']:
                     testes[stat][ind]['locais'].append(local)
 
 
 testes = {
     12: {
-        1: {'count': 0, 'locais': ['']},
+        1: {
+            'count': 0, 
+            'locais': ['']
+        },
         2: {'count': 0, 'locais': ['']},
         3: {'count': 0, 'locais': ['']},
         4: {'count': 0, 'locais': ['']},
