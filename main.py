@@ -35,31 +35,20 @@ if args.subparser == 'calc':
 elif args.subparser == 'format':
     entrada = args.arquivo_entrada
     saida = args.arquivo_saida
-
-# verificção da execução
+    
 if args.subparser == 'calc':
     Arq = Arquivo(entrada, saida)
-    # Se for por Bairro
     if bai:
-        # abre o arquivo data
         with open(Arq.nomeA, 'r') as f:
             file = csv.reader(f)
             mod = Bairro()
-
-            # Por linha do data
-            for row in file: 
-
+            for row in file:
                 if row[0] != mod.dias:
                     mod.locais = []
                     mod.nats = []
-
-                # por estação
                 for stat in mod.states:
-
                     if row[stat] == 'NA':
                         resender = False
-
-                    # Verificação do Limiar
                     elif la < float(row[stat]) <= lb:
                         if row[0] != mod.dias:
                             testes[stat]['chu']['count'] += 1
@@ -83,27 +72,21 @@ if args.subparser == 'calc':
                 mod.dias = row[0]
                 mod.states = [12, 14, 16, 18, 20, 22, 24, 26]
 
-            Arq.saverB(mod.states, mod.names)
-    # Se for por Município
+            Arq.saverM(mod.states, mod.names)
     elif mun:
         with open(Arq.nomeA, 'r') as f:
             file = csv.reader(f)
             mod = Municipio()
-
             st = ['munmed', 'munmax']
-
             for row in file:
                 for stat in st:
                     resender = False
-
                     if row[0] != mod.dias:
                         mod.nats = []
-
                     if stat == 'munmed':
                         limiar = row[8]
                     elif stat == 'munmax':
                         limiar = row[10]
-
                     if limiar == 'NA':
                         resender = False
                     elif la < float(limiar) <= lb:
@@ -112,7 +95,6 @@ if args.subparser == 'calc':
                         resender = True
                     else:
                         resender = False
-
                     if resender:
                         if row[6] != '':
                             ver = mod.define(row[6], row[0])
