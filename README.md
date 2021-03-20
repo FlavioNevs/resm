@@ -9,8 +9,7 @@ Argumentos:
         -as     Referencia o arquivo de Saida
     
     calc
-        -m      Faz calculo por município
-        -b      Faz calculo por bairro/estação
+        -m/b    Faz calculo por Município/Bairro
         -ae     Referencia o arquivo de entrada
         -as     Referencia o arquivo de Saida
         -lA     Referencia o Limiar A
