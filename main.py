@@ -18,8 +18,8 @@ calc.add_argument('--municipio', '-m', action='store_true', help='Fazer conta do
 calc.add_argument('--bairro', '-b', action='store_true', help='Fazer conta do limiar por cada Estacão/Bairro')
 calc.add_argument('--arquivo_entrada', '-ae', type=str, help='Seleciona o arquivo de entrada', required=True)
 calc.add_argument('--arquivo_saida', '-as', type=str, help='Seleciona o arquivo de saída', required=True)
-calc.add_argument('--limiarA', '-lA', type=int,help='Limiar A', required=True)
-calc.add_argument('--limiarB', '-lB', type=int,help='Limiar A', required=True)
+calc.add_argument('--limiarA', '-lA', type=int,help='Define o limiar A', required=True)
+calc.add_argument('--limiarB', '-lB', type=int,help='Define o limiar B', required=True)
 calc.set_defaults(subparser='calc')
 
 args = parser.parse_args()
@@ -72,7 +72,7 @@ if args.subparser == 'calc':
                 mod.dias = row[0]
                 mod.states = [12, 14, 16, 18, 20, 22, 24, 26]
 
-            Arq.saverM(mod.states, mod.names)
+            Arq.saver(la, lb, mod.states, mod.names)
     elif mun:
         with open(Arq.nomeA, 'r') as f:
             file = csv.reader(f)
@@ -102,8 +102,7 @@ if args.subparser == 'calc':
                                 mod.dine(row[6], stat)
                                 mod.nats.append(row[6])
                 mod.dias = row[0]
-            for stat in st:
-                Arq.saverM(la, lb, stat)
+            Arq.saver(la, lb, st, False)
 elif args.subparser == 'format':
     form = formater(entrada, saida)
     form.forma()
