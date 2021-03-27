@@ -20,30 +20,19 @@ class Arquivo:
     def __init__(self, nomeA, nomeB):
         self.nomeA = nomeA
         self.nomeB = nomeB
-        self.titulo = 'ID,Alagamento,Desabamento,Deslizamento,Escorregamento,Inundacao,Solapamento,QtChuva'
 
-    def saverB(self, states, names):
-        with open(self.nomeB, 'w') as file:
-            file.write(self.titulo)
+    def saver(self, la, lb, loc, nm):
+        for local in loc:
+            if nm == False:
+                ver = f'_{local}.'
+            else:
+                ver = f'_{nm[loc.index(local)]}.'
+            with open(self.nomeB.replace('.',ver ), 'a') as file:
 
-            for rw in states:
-                file.write('\n' + names[states.index(rw)])
+                file.write(f'\n{la}_{lb}')
 
-                for row in testes[rw].items():
+                for row in testes[local].items():
                     file.write(',' + str(row[1]['count']))
-
-    def saverM(self, la, lb, loc):
-        if loc == 'munmed':
-            ver = '_med.'
-        else:
-            ver = '_max.'
-
-        with open(self.nomeB.replace('.', ver), 'a') as file:
-
-            file.write(f'\n{la}_{lb}')
-
-            for row in testes[loc].items():
-                file.write(',' + str(row[1]['count']))
 
 class Municipio:
     def __init__(self):
