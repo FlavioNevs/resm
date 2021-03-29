@@ -37,14 +37,16 @@ class Arquivo:
 class Municipio:
     def __init__(self):
         self.dias = 0
-        self.nats = []
+        self.nats = {
+            'munmax': [],
+            'munmed': []
+        }
     
-    def define(self, nat, dia,):
+    def define(self, nat, dia, stat):
         ver = True
-        for natur in self.nats:
-            if nat == natur and dia == self.dias:
-                ver = False
-                break
+        if nat in self.nats[stat] and dia == self.dias:
+            ver = False
+
         return ver
     
     @staticmethod

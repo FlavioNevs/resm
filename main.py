@@ -79,28 +79,30 @@ if args.subparser == 'calc':
             mod = Municipio()
             st = ['munmed', 'munmax']
             for row in file:
+                if row[0] != mod.dias:
+                    mod.nats['munmed'] = []
+                    mod.nats['munmax'] = []
+
                 for stat in st:
                     resender = False
-                    if row[0] != mod.dias:
-                        mod.nats = []
+
                     if stat == 'munmed':
                         limiar = row[8]
                     elif stat == 'munmax':
                         limiar = row[10]
+
                     if limiar == 'NA':
                         resender = False
-                    elif la < float(limiar) <= lb:
+                    elif la <= float(limiar) <= lb:
                         if row[0] != mod.dias:
                             testes[stat]['chu']['count'] += 1
                         resender = True
-                    else:
-                        resender = False
                     if resender:
-                        if row[6] != '':
-                            ver = mod.define(row[6], row[0])
+                        if row[6] != '' and row[5] != '0':
+                            ver = mod.define(row[6], row[0], stat)
                             if ver:
                                 mod.dine(row[6], stat)
-                                mod.nats.append(row[6])
+                                mod.nats[stat].append(row[6])
                 mod.dias = row[0]
             Arq.saver(la, lb, st, False)
 elif args.subparser == 'format':
