@@ -7,14 +7,15 @@ class formater:
     
     def forma(self):
         with open(self.entrada, "r", encoding="latin-1") as r:
-            resm = csv.reader(r)
 
             with open(self.saida, 'w') as outro:
-                for row in resm:
-                    var = str(row[0])
+                for row in r:
+                    var = str(row)
+                    print(var)
+                    var = var.replace(',', '.')
                     var = var.replace(';', ',')
                     var = var.replace('"', '')
-                    outro.write(var+'\n')
+                    outro.write(var)
 class Arquivo:
 
     def __init__(self, nomeA, nomeB):
@@ -60,8 +61,8 @@ class Municipio:
 
 class Bairro:
     def __init__(self):
-        self.states = [12, 14 ,16, 18, 20, 22, 24, 26]
-        self.names = ['DAEE', 'CENA', 'CENT', 'JDIN', 'JDNL', 'JDSC', 'PQJA', 'TABO']
+        self.states = [12, 14 ,16, 18, 20, 22, 24, 26, 28, 29]
+        self.names = ['DAEE', 'CENA', 'CENT', 'JDIN', 'JDNL', 'JDSC', 'PQJA', 'TABO', 'CENTRO', 'CGDE']
         self.dias = 0
         self.locais = []
         self.nats = []
@@ -69,13 +70,13 @@ class Bairro:
     @staticmethod
     def finder(local):
         if local == "Conceicao":
-            return [12]
+            return [22]
         elif local == "Centro":
-            return [8, 9, 13]
+            return [14, 16, 24, 28]
         elif local == "Eldorado":
-            return [10]
+            return [18]
         elif local == "Casa Grande":
-            return [7, 11]
+            return [12, 20, 29]
         elif local == "Taboao":
             return [14]
         else:
@@ -174,6 +175,24 @@ testes = {
         'chu': {'count': 0, 'locais': ['']}
     },
     26: {
+        1: {'count': 0, 'locais': ['']},
+        2: {'count': 0, 'locais': ['']},
+        3: {'count': 0, 'locais': ['']},
+        4: {'count': 0, 'locais': ['']},
+        5: {'count': 0, 'locais': ['']},
+        6: {'count': 0, 'locais': ['']},
+        'chu': {'count': 0, 'locais': ['']}
+    },
+    28: {
+        1: {'count': 0, 'locais': ['']},
+        2: {'count': 0, 'locais': ['']},
+        3: {'count': 0, 'locais': ['']},
+        4: {'count': 0, 'locais': ['']},
+        5: {'count': 0, 'locais': ['']},
+        6: {'count': 0, 'locais': ['']},
+        'chu': {'count': 0, 'locais': ['']}
+    },
+    29: {
         1: {'count': 0, 'locais': ['']},
         2: {'count': 0, 'locais': ['']},
         3: {'count': 0, 'locais': ['']},

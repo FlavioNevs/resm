@@ -70,7 +70,7 @@ if args.subparser == 'calc':
                             mod.nats.append(row[6])
 
                 mod.dias = row[0]
-                mod.states = [12, 14, 16, 18, 20, 22, 24, 26]
+                mod.states = [12, 14, 16, 18, 20, 22, 24, 26, 28, 29]
 
             Arq.saver(la, lb, mod.states, mod.names)
     elif mun:
