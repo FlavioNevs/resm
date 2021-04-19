@@ -37,6 +37,7 @@ elif args.subparser == 'format':
     saida = args.arquivo_saida
     
 if args.subparser == 'calc':
+    dia = 0
     Arq = Arquivo(entrada, saida)
     if bai:
         with open(Arq.nomeA, 'r') as f:
@@ -44,8 +45,19 @@ if args.subparser == 'calc':
             mod = Bairro()
             for row in file:
                 if row[0] != mod.dias:
+                    print(f'passou dia - {dia}')
+                    dia += 1
                     mod.locais = []
                     mod.nats = []
+
+                    if mod.dicstat:
+                        mod.dic_writer()
+                        print(mod.dict)
+                        mod.dic_reset()
+                        print(mod.dict)
+                    
+                    mod.dicstat = False
+
                 for stat in mod.states:
                     if row[stat] == 'NA':
                         resender = False
@@ -55,9 +67,9 @@ if args.subparser == 'calc':
                         resender = True
                     else:
                         resender = False
-
+                    
+                    ver = False
                     for result in mod.finder(row[7]):
-                        ver = False
 
                         if resender and result == stat:
                             ver = mod.define(row[6], row[7], row[0])
@@ -66,13 +78,22 @@ if args.subparser == 'calc':
 
                         if ver:
                             mod.dine(row[6], stat, row[7])
-                            mod.locais.append(row[7])
                             mod.nats.append(row[6])
+                            
+                    if ver and row[7] not in mod.locais:
+                        mod.dict['geral'] += 1
+                        mod.dict[row[6]] += 1
+                        mod.dicstat = True
+
+                        mod.locais.append(row[7])
+                        
 
                 mod.dias = row[0]
                 mod.states = [12, 14, 16, 18, 20, 22, 24, 26, 28, 29]
 
             Arq.saver(la, lb, mod.states, mod.names)
+            mod.dic_saver(la, lb)
+            
     elif mun:
         with open(Arq.nomeA, 'r') as f:
             file = csv.reader(f)
