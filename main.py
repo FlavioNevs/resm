@@ -45,16 +45,13 @@ if args.subparser == 'calc':
             mod = Bairro()
             for row in file:
                 if row[0] != mod.dias:
-                    print(f'passou dia - {dia}')
                     dia += 1
                     mod.locais = []
                     mod.nats = []
 
                     if mod.dicstat:
                         mod.dic_writer()
-                        print(mod.dict)
                         mod.dic_reset()
-                        print(mod.dict)
                     
                     mod.dicstat = False
 
@@ -81,6 +78,7 @@ if args.subparser == 'calc':
                             mod.nats.append(row[6])
                             
                     if ver and row[7] not in mod.locais:
+                        print(f'{row[0]}')
                         mod.dict['geral'] += 1
                         mod.dict[row[6]] += 1
                         mod.dicstat = True

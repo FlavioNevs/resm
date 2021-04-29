@@ -122,11 +122,8 @@ class Bairro:
             if nat == natur:
                 for loc in self.locais:
                     if local == loc and dia == self.dias:
-
                         ver = False
                         break
-
-        
         return ver
 
     @staticmethod

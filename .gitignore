@@ -1,5 +1,7 @@
 resm*.*
 
+__pycache__
+
 result*.*
 
 alagamento.csv
