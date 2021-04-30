@@ -41,6 +41,36 @@ class Municipio:
             'munmax': [],
             'munmed': []
         }
+        self.dict = {
+            'Alagamento': 0,
+            'Desabamento': 0,
+            'Deslizamento': 0,
+            'Escorregamento': 0,
+            'Inundacao': 0,
+            'Solapamento':  0,
+            } 
+
+    def dic_writer(self):
+        for sel in self.dict.items():
+            if sel[1] != 0:
+                events[sel[0]][sel[1]] +=1
+
+    def dic_reset(self):
+        self.dict['Alagamento'] = 0
+        self.dict['Desabamento'] = 0
+        self.dict['Deslizamento'] = 0
+        self.dict['Escorregamento'] = 0
+        self.dict['Inundacao'] = 0
+        self.dict['Solapamento'] = 0
+    
+    def dic_saver(self, la, lb):
+
+        for env in events.items():
+            with open(f'{env[0]}.csv', 'a') as file:
+                file.write(f'\n{la}_{lb}')
+
+                for rg in range(1, 6): 
+                    file.write(f',{env[1][rg]}')
     
     def define(self, nat, dia, stat):
         ver = True
@@ -141,13 +171,13 @@ class Bairro:
 
 
 events = {
-    'geral': {1: 0, 2: 0, 3: 0, 4: 0, 5: 0},
-    'Alagamento': {1: 0, 2: 0, 3: 0, 4: 0, 5: 0},
-    'Desabamento': {1: 0, 2: 0, 3: 0, 4: 0, 5: 0},
-    'Deslizamento': {1: 0, 2: 0, 3: 0, 4: 0, 5: 0},
-    'Escorregamento': {1: 0, 2: 0, 3: 0, 4: 0, 5: 0},
-    'Inundacao': {1: 0, 2: 0, 3: 0, 4: 0, 5: 0},
-    'Solapamento': {1: 0, 2: 0, 3: 0, 4: 0, 5: 0}
+    'geral': {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0, 13: 0},
+    'Alagamento': {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0, 13: 0},
+    'Desabamento': {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0, 13: 0},
+    'Deslizamento': {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0, 13: 0},
+    'Escorregamento': {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0, 13: 0},
+    'Inundacao': {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0, 13: 0},
+    'Solapamento': {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0, 13: 0}
 }
 
 testes = {

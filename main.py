@@ -65,26 +65,24 @@ if args.subparser == 'calc':
                     else:
                         resender = False
                     
-                    ver = False
                     for result in mod.finder(row[7]):
 
-                        if resender and result == stat:
-                            ver = mod.define(row[6], row[7], row[0])
-                        elif resender:
-                            ver = mod.define(row[6], row[7], row[0])
-
-                        if ver:
+                        if resender and result == stat and mod.define(row[6], row[7], row[0]):
                             mod.dine(row[6], stat, row[7])
                             mod.nats.append(row[6])
                             
-                    if ver and row[7] not in mod.locais:
-                        print(f'{row[0]}')
-                        mod.dict['geral'] += 1
-                        mod.dict[row[6]] += 1
-                        mod.dicstat = True
+                            if row[7] not in mod.locais:
+                                with open('dados.txt', 'a') as fore:
+                                    fore.write(f'\n{row[0]} | {row[stat]} -  {row[7]}, {row[6]}')
+                                    print(f'{row[0]} | {row[stat]} -  {row[7]}, {row[6]}')
 
-                        mod.locais.append(row[7])
-                        
+                                if stat <= 26:
+                                    mod.dict['geral'] += 1
+                                mod.dict[row[6]] += 1
+                                mod.dicstat = True
+
+                                mod.locais.append(row[7])
+                            
 
                 mod.dias = row[0]
                 mod.states = [12, 14, 16, 18, 20, 22, 24, 26, 28, 29]
@@ -101,6 +99,10 @@ if args.subparser == 'calc':
                 if row[0] != mod.dias:
                     mod.nats['munmed'] = []
                     mod.nats['munmax'] = []
+                    
+                    if mod.dicstat:
+                        mod.dic_writer()
+                        mod.dic_reset()
 
                 for stat in st:
                     resender = False
@@ -117,11 +119,16 @@ if args.subparser == 'calc':
                             testes[stat]['chu']['count'] += 1
                         resender = True
                     if resender:
-                        if row[6] != '' and row[5] != '0':
-                            ver = mod.define(row[6], row[0], stat)
-                            if ver:
-                                mod.dine(row[6], stat)
-                                mod.nats[stat].append(row[6])
+                        if row[6] != '' and row[5] != '0' and mod.define(row[6], row[0], stat):
+                            mod.dine(row[6], stat)
+                            mod.nats[stat].append(row[6])
+
+                            if stat == 'munmax':
+                                mod.dict[row[6]] += 1
+                                mod.dicstat = True
+
+
+
                 mod.dias = row[0]
             Arq.saver(la, lb, st, False)
 elif args.subparser == 'format':
