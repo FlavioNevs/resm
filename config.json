@@ -1,0 +1,34 @@
+{
+    "local": {
+        "db": "\\models\\DataResm.db"
+    },
+    "data": {
+        "norm": ["DAEE", "CENA", "CENT", "JDIN", "JDNL", "JDSC", "PQJA", "TABO", "MAXCENT", "MAXCGDE"],
+        "acum": ["acumCENA", "acumDAEE", "acumJDIN", "acumCENT", "acumJDNL", "acumJDSC", "acumPQJA", "acumMAXCGDE", "acumMAXCENT", "acumTABO"],
+        "events": ["Alagamento", "Desabamento", "Deslizamento", "Inundacao", "Solapamento"],
+        "local": ["Conceicao", "Centro", "Eldorado", "Casa Grande", "Taboao"],
+        "xcld_date": [
+            736042, 736077, 736004, 736711,
+            736707, 736732, 737324, 736999,
+            735997, 737021, 737022, 735656,
+            735997, 736767, 737187
+        ],
+        "xcld_bair": ["Vila Nogueira", "Inamar", "Serraria", "Piraporinha", "Canhema", "Campanario"],
+        "local_norm": {
+            "Conceicao": ["JDSC"],
+            "Centro": ["CENA", "CENT", "PQJA", "MAXCENT"],
+            "Eldorado": ["JDIN"],
+            "Casa Grande": ["DAEE", "JDNL", "MAXCGDE"],
+            "Taboao": ["TABO"]
+        },
+        "local_acum": {
+            "Conceicao": ["acumJDSC"],
+            "Centro": ["acumCENA", "acumCENT","acumPQJA", "acumMaxCENT"],
+            "Eldorado": ["acumJDIN"],
+            "Casa Grande": ["acumDAEE", "acumJDNL", "acumMaxCGDE"],
+            "Taboao": ["acumTABO"]
+        }
+    }
+}
+
+
