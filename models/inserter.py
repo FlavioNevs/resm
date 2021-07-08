@@ -1,7 +1,8 @@
 from model import DataBase
 
-db = DataBase('DataResm.db')
-with open('DataVanessa.sql', 'r') as file:
+db = DataBase('models\\DataResm.db')
+with open('models\\DataVanessa3.sql', 'r') as file:
     for row in file:
-        db.exec_sql(row)
         print(row)
+        db.exec_sql(row)
+    

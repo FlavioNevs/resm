@@ -1,6 +1,10 @@
 import sqlite3
-import datetime
-from ClassModule.utils import access
+import json 
+import os
+
+BASE_DIR = os.getcwd()
+with open(f"{BASE_DIR}\\config.json", 'r', encoding='utf-8') as file:
+    access = json.load(file)
 
 class DataBase:
     def __init__(self, db_file):
@@ -75,7 +79,6 @@ class DataBase:
             return [(0)]
         return cursor.fetchall()
 
-
     def __create_table(self):
         self.__connect()
         statement ="""CREATE TABLE IF NOT EXISTS `Dados` (
@@ -88,7 +91,7 @@ class DataBase:
                         `Bairro` TEXT, 
                         `chuva_acum` INT, 
                         `Naturezadoevento` TEXT, 
-                        `max` REAL, `media` REAL, `min` REAL, `desvpad` REAL, 
+                        `max` REAL, `acumMunMax` REAL,`media` REAL, `min` REAL, `desvpad` REAL, 
                         `DAEE` REAL, `acumCENA` REAL, `acumDAEE` REAL, `CENA` REAL, 
                         `CENT` REAL, `acumCENT` REAL, `JDIN` REAL, `acumJDIN` REAL, 
                         `JDNL` REAL, `acumJDNL` REAL, `JDSC` REAL, `acumJDSC` REAL, 
