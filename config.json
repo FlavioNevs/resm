@@ -4,7 +4,7 @@
     },
     "data": {
         "norm": ["DAEE", "CENA", "CENT", "JDIN", "JDNL", "JDSC", "PQJA", "TABO", "MAXCENT", "MAXCGDE"],
-        "acum": ["acumCENA", "acumDAEE", "acumJDIN", "acumCENT", "acumJDNL", "acumJDSC", "acumPQJA", "acumMAXCGDE", "acumMAXCENT", "acumTABO"],
+        "acum": ["acumCENA", "acumDAEE", "acumJDIN", "acumCENT", "acumJDNL", "acumJDSC", "acumPQJA", "acumMaxCGDE", "acumMaxCENT", "acumTABO"],
         "events": ["Alagamento", "Desabamento", "Deslizamento", "Inundacao", "Solapamento"],
         "local": ["Conceicao", "Centro", "Eldorado", "Casa Grande", "Taboao"],
         "xcld_date": [
